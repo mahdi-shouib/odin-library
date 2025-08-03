@@ -15,3 +15,18 @@ function addBook(title, author, pages, read) {
     const newBook = new Book(randomId, title, author, pages, read);
     myLibrary.push(newBook);
 }
+
+function displayBooks() {
+    myLibrary.forEach(book => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = 
+        `
+        <td>${book.id}</td>
+        <td>${book.title}</td>
+        <td>${book.author}</td>
+        <td>${book.pages}</td>
+        <td>${(book.read)? 'Yes' : 'No'}</td>
+        `;
+        document.querySelector('table').appendChild(tr);
+    })
+}
