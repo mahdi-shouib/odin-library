@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    font-family: sans-serif;
 }
 
 body {
@@ -24,6 +25,10 @@ td, th {
     margin-block: 10px;
 }
 
+form {
+    display: none;
+}
+
 #read {
     width: 21px;
     height: 21px;
@@ -33,8 +38,15 @@ label {
     width: 100px;
 }
 
+input {
+    padding: 2px;
+    font-size: 16px;
+    outline: none;
+}
+
 button {
     padding: 8px;
+    margin-bottom: 10px;
     font-size: 16px;
     border-radius: 6px;
     color: white;
