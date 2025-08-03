@@ -4,6 +4,7 @@ const form = document.querySelector('form');
 const table = document.querySelector('table');
 
 document.querySelector('#new-book').onclick = function() {
+    this.textContent = (this.textContent.startsWith('A'))? 'Back to table' : 'Add new book';
     showOrHide();
 }
 
