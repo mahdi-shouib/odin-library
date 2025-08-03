@@ -45,6 +45,9 @@ function displayBooks() {
         <td>${book.author}</td>
         <td>${book.pages}</td>
         <td>${(book.read)? 'Yes' : 'No'}</td>
+        <td>
+        <button id="delete">Delete book</button>
+        </td>
         `;
         document.querySelector('table').appendChild(tr);
     })
