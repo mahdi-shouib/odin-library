@@ -1,5 +1,18 @@
 const myLibrary = [];
 
+const form = document.querySelector('form');
+const table = document.querySelector('table');
+
+document.querySelector('#new-book').onclick = function() {
+    showOrHide();
+}
+
+document.querySelector('form').onsubmit = function(event) {
+    event.preventDefault();
+    form.reset();
+    showOrHide();
+}
+
 function Book(id, title, author, pages, read) {
     if (!new.target)
         return 'Please use the "new" keyword';
@@ -29,4 +42,9 @@ function displayBooks() {
         `;
         document.querySelector('table').appendChild(tr);
     })
+}
+
+function showOrHide() {
+    form.style.display = (form.style.display === 'block')? 'none' : 'block';
+    table.style.display = (table.style.display === 'none')? 'table' : 'none';
 }
