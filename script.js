@@ -25,6 +25,10 @@ function Book(id, title, author, pages, read) {
     this.read = read;
 }
 
+Book.prototype.toggleRead = function () {
+    this.read = !this.read;
+}
+
 function addBook(title, author, pages, read) {
     const randomId = crypto.randomUUID();
     const newBook = new Book(randomId, title, author, pages, read);
@@ -51,7 +55,10 @@ function displayBooks() {
         <td>${book.title}</td>
         <td>${book.author}</td>
         <td>${book.pages}</td>
-        <td>${(book.read) ? 'Yes' : 'No'}</td>
+        <td>
+        ${(book.read) ? 'Yes' : 'No'}
+        <button class="read-button" data-id="${book.id}"></button>
+        </td>
         <td>
         <button class="delete-button" data-id="${book.id}">Delete book</button>
         </td>
@@ -64,10 +71,21 @@ function displayBooks() {
             button.parentElement.parentElement.remove();
         }
     })
+    document.querySelectorAll('.read-button').forEach(button => {
+        button.textContent = (bookWithId(button.dataset.id).read) ? "Unread" : "Read";
+        button.onclick = function () {
+            bookWithId(button.dataset.id).toggleRead();
+            displayBooks();
+        }
+    })
 }
 
 function showOrHide() {
     form.style.display = (form.style.display === 'block') ? 'none' : 'block';
     table.style.display = (table.style.display === 'none') ? 'table' : 'none';
     document.querySelector('#new-book').textContent = (form.style.display === 'block') ? 'Back to table' : 'Add new book';
+}
+
+function bookWithId(id) {
+    return myLibrary.find(book => book.id === id);
 }
