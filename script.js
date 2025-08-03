@@ -9,6 +9,8 @@ document.querySelector('#new-book').onclick = function() {
 
 document.querySelector('form').onsubmit = function(event) {
     event.preventDefault();
+    addBook(form.title.value, form.author.value, form.pages.value, form.read.checked);
+    displayBooks();
     form.reset();
     showOrHide();
 }
@@ -30,6 +32,9 @@ function addBook(title, author, pages, read) {
 }
 
 function displayBooks() {
+    document.querySelectorAll('tr').forEach((tr, index) => {
+        if (index > 0) tr.remove();
+    })
     myLibrary.forEach(book => {
         const tr = document.createElement('tr');
         tr.innerHTML = 
