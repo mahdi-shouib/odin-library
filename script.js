@@ -3,12 +3,11 @@ const myLibrary = [];
 const form = document.querySelector('form');
 const table = document.querySelector('table');
 
-document.querySelector('#new-book').onclick = function() {
-    this.textContent = (this.textContent.startsWith('A'))? 'Back to table' : 'Add new book';
+document.querySelector('#new-book').onclick = function () {
     showOrHide();
 }
 
-document.querySelector('form').onsubmit = function(event) {
+document.querySelector('form').onsubmit = function (event) {
     event.preventDefault();
     addBook(form.title.value, form.author.value, form.pages.value, form.read.checked);
     displayBooks();
@@ -32,28 +31,43 @@ function addBook(title, author, pages, read) {
     myLibrary.push(newBook);
 }
 
+function removeBook(id) {
+    myLibrary.forEach((book, index) => {
+        if (book.id === id) {
+            myLibrary.splice(index, 1);
+        }
+    })
+}
+
 function displayBooks() {
     document.querySelectorAll('tr').forEach((tr, index) => {
         if (index > 0) tr.remove();
     })
     myLibrary.forEach(book => {
         const tr = document.createElement('tr');
-        tr.innerHTML = 
+        tr.innerHTML =
         `
         <td>${book.id}</td>
         <td>${book.title}</td>
         <td>${book.author}</td>
         <td>${book.pages}</td>
-        <td>${(book.read)? 'Yes' : 'No'}</td>
+        <td>${(book.read) ? 'Yes' : 'No'}</td>
         <td>
-        <button id="delete">Delete book</button>
+        <button class="delete-button" data-id="${book.id}">Delete book</button>
         </td>
         `;
         document.querySelector('table').appendChild(tr);
     })
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.onclick = function () {
+            removeBook(button.dataset.id);
+            button.parentElement.parentElement.remove();
+        }
+    })
 }
 
 function showOrHide() {
-    form.style.display = (form.style.display === 'block')? 'none' : 'block';
-    table.style.display = (table.style.display === 'none')? 'table' : 'none';
+    form.style.display = (form.style.display === 'block') ? 'none' : 'block';
+    table.style.display = (table.style.display === 'none') ? 'table' : 'none';
+    document.querySelector('#new-book').textContent = (form.style.display === 'block') ? 'Back to table' : 'Add new book';
 }
