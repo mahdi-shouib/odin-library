@@ -60,7 +60,7 @@ button:hover {
     filter: brightness(0.95);
 }
 
-#delete {
+.delete-button {
     width: 100%;
     margin: 0;
     background-color: orangered;
